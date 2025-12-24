@@ -1,0 +1,23 @@
+[package]
+name = "moving-jeddah"
+version = "0.1.0"
+description = "Moving guide website"
+
+[fs]
+"/public" = "."
+
+[[module]]
+name = "static-web-server"
+source = "wasmer/static-web-server@0.4.1"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "start"
+module = "static-web-server"
+runner = "wasi"
+
+[command.annotations.wasi]
+env = ["PORT=3000", "ROOT=/public"]
